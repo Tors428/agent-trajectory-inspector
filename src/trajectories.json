@@ -1,0 +1,254 @@
+[
+  {
+    "id": "traj_001",
+    "title": "Find 5-star Asian restaurant in San Diego",
+    "goal": "Find a 5-star Asian restaurant in San Diego and click on it.",
+    "status": "failure",
+    "steps": [
+      {
+        "id": "step_1",
+        "type": "thought",
+        "summary": "Decide search strategy",
+        "content": {
+          "reasoning": "I need to find a 5-star Asian restaurant in San Diego."
+        }
+      },
+      {
+        "id": "step_2",
+        "type": "tool_call",
+        "summary": "web_search",
+        "content": {
+          "tool": "web_search",
+          "arguments": { "query": "5 star Asian restaurant San Diego" }
+        }
+      },
+      {
+        "id": "step_3",
+        "type": "observation",
+        "summary": "Search returned results",
+        "content": {
+          "result": "Page loaded with a list of restaurants and star ratings.",
+          "raw": "(DOM snapshot text would go here)"
+        }
+      },
+      {
+        "id": "step_4",
+        "type": "action",
+        "summary": "Filter for 5-star",
+        "content": {
+          "actionType": "click",
+          "target": "5-star filter button",
+          "description": "Clicked the 5-star filter to narrow results."
+        }
+      },
+      {
+        "id": "step_5",
+        "type": "observation",
+        "summary": "No 5-star results",
+        "content": {
+          "result": "No 5-star Asian restaurants found in San Diego.",
+          "raw": "(DOM snapshot showing empty results)"
+        }
+      },
+      {
+        "id": "step_6",
+        "type": "thought",
+        "summary": "Plan to lower threshold to 4.9",
+        "content": {
+          "reasoning": "No 5-star results. I should try 4.9-star instead as the next best option."
+        }
+      },
+      {
+        "id": "step_7",
+        "type": "action",
+        "summary": "Clicked 4.5-star (deviates from plan)",
+        "content": {
+          "actionType": "click",
+          "target": "4.5-star restaurant card",
+          "description": "Clicked on a 4.5-star restaurant despite the plan saying 4.9-star. This is the failure point."
+        }
+      },
+      {
+        "id": "step_8",
+        "type": "observation",
+        "summary": "Final state — task failed",
+        "content": {
+          "result": "Landed on a 4.5-star restaurant page. Goal not met.",
+          "raw": "(DOM snapshot of restaurant detail page)"
+        }
+      }
+    ]
+  },
+  {
+    "id": "traj_002",
+    "title": "Book a sushi reservation",
+    "goal": "Book a table for two at a sushi restaurant in the Mission for Friday at 7pm.",
+    "status": "success",
+    "steps": [
+      {
+        "id": "step_1",
+        "type": "thought",
+        "summary": "Plan the approach",
+        "content": {
+          "reasoning": "I need to find a sushi place in the Mission and book a table for 2 on Friday 7pm."
+        }
+      },
+      {
+        "id": "step_2",
+        "type": "tool_call",
+        "summary": "web_search for sushi in Mission",
+        "content": {
+          "tool": "web_search",
+          "arguments": {
+            "query": "sushi restaurant Mission District San Francisco"
+          }
+        }
+      },
+      {
+        "id": "step_3",
+        "type": "observation",
+        "summary": "Got list of restaurants",
+        "content": {
+          "result": "Top result: Ichi Sushi. Resy reservations available.",
+          "raw": "(DOM snapshot text)"
+        }
+      },
+      {
+        "id": "step_4",
+        "type": "action",
+        "summary": "Navigate to Resy",
+        "content": {
+          "actionType": "navigate",
+          "target": "https://resy.com/cities/sf/ichi-sushi",
+          "description": "Opened the Resy booking page for Ichi Sushi."
+        }
+      },
+      {
+        "id": "step_5",
+        "type": "action",
+        "summary": "Click 7:00 PM Friday",
+        "content": {
+          "actionType": "click",
+          "target": "7:00 PM time slot, party of 2",
+          "description": "Selected the requested time and party size."
+        }
+      },
+      {
+        "id": "step_6",
+        "type": "observation",
+        "summary": "No tables at 7:00",
+        "content": {
+          "result": "No tables available at 7:00 PM. Closest available: 7:30 PM.",
+          "raw": "(DOM snapshot)"
+        }
+      },
+      {
+        "id": "step_7",
+        "type": "thought",
+        "summary": "7:30 is close enough — try it",
+        "content": {
+          "reasoning": "User said 7pm but 7:30 is the closest available. That should be acceptable."
+        }
+      },
+      {
+        "id": "step_8",
+        "type": "action",
+        "summary": "Click 7:30 PM slot",
+        "content": {
+          "actionType": "click",
+          "target": "7:30 PM time slot",
+          "description": "Selected 7:30 PM Friday, party of 2."
+        }
+      },
+      {
+        "id": "step_9",
+        "type": "observation",
+        "summary": "Booking confirmed",
+        "content": {
+          "result": "Reservation confirmed for Friday 7:30 PM, party of 2 at Ichi Sushi.",
+          "raw": "(DOM confirmation page)"
+        }
+      }
+    ]
+  },
+  {
+    "id": "traj_003",
+    "title": "Cancel Netflix subscription (dark pattern)",
+    "goal": "Cancel the user's Netflix subscription.",
+    "status": "failure",
+    "steps": [
+      {
+        "id": "step_1",
+        "type": "thought",
+        "summary": "Plan: find the cancel button",
+        "content": {
+          "reasoning": "I need to navigate to Netflix account settings and cancel the subscription."
+        }
+      },
+      {
+        "id": "step_2",
+        "type": "action",
+        "summary": "Navigate to account page",
+        "content": {
+          "actionType": "navigate",
+          "target": "https://www.netflix.com/youraccount",
+          "description": "Opened the user's Netflix account page."
+        }
+      },
+      {
+        "id": "step_3",
+        "type": "observation",
+        "summary": "Account page loaded",
+        "content": {
+          "result": "Page shows membership info. Prominent green 'Manage plan' button. Smaller gray 'Cancel Membership' link below.",
+          "raw": "(DOM snapshot)"
+        }
+      },
+      {
+        "id": "step_4",
+        "type": "thought",
+        "summary": "Misled by visual hierarchy",
+        "content": {
+          "reasoning": "The big green button is probably the main cancellation action. Clicking 'Manage plan'."
+        }
+      },
+      {
+        "id": "step_5",
+        "type": "action",
+        "summary": "Clicked 'Manage plan' (wrong path)",
+        "content": {
+          "actionType": "click",
+          "target": "Manage plan button",
+          "description": "Clicked the prominent green button instead of the smaller cancel link."
+        }
+      },
+      {
+        "id": "step_6",
+        "type": "observation",
+        "summary": "Landed on upsell page",
+        "content": {
+          "result": "Page is now showing plan upgrade options, not cancellation.",
+          "raw": "(DOM snapshot of upsell)"
+        }
+      },
+      {
+        "id": "step_7",
+        "type": "thought",
+        "summary": "Confused — maybe this is part of the cancel flow",
+        "content": {
+          "reasoning": "This looks like plan management. Maybe I need to pick a cheaper plan as the cancellation path."
+        }
+      },
+      {
+        "id": "step_8",
+        "type": "action",
+        "summary": "Clicked 'Continue with Standard' (manipulated)",
+        "content": {
+          "actionType": "click",
+          "target": "Continue with Standard plan",
+          "description": "Agent was misled by the dark pattern UI and stayed subscribed instead of cancelling."
+        }
+      }
+    ]
+  }
+]

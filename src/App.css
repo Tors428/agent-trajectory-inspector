@@ -1,0 +1,185 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: #fafafa;
+  color: #1a1a1a;
+}
+
+.app {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.app h1 {
+  font-size: 22px;
+  margin: 0 0 4px 0;
+}
+
+.app h2 {
+  font-size: 16px;
+  font-weight: 500;
+  color: #555;
+  margin: 0 0 4px 0;
+}
+
+.app .goal {
+  font-size: 14px;
+  color: #666;
+  margin: 0 0 20px 0;
+}
+
+.layout {
+  display: flex;
+  gap: 20px;
+}
+
+.timeline {
+  flex: 0 0 280px;
+  background: white;
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+  padding: 12px;
+}
+
+.timeline h3 {
+  font-size: 12px;
+  text-transform: uppercase;
+  color: #999;
+  letter-spacing: 0.5px;
+  margin: 0 0 8px 0;
+}
+
+.timeline ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.timeline li {
+  padding: 8px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  margin-bottom: 2px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.timeline li:hover {
+  background: #f0f0f0;
+}
+
+.timeline li.selected {
+  background: #e3f0ff;
+  font-weight: 600;
+}
+
+.detail {
+  flex: 1;
+  background: white;
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+  padding: 20px;
+  min-height: 400px;
+}
+
+.detail h3 {
+  font-size: 12px;
+  text-transform: uppercase;
+  color: #999;
+  letter-spacing: 0.5px;
+  margin: 0 0 12px 0;
+}
+
+.detail h4 {
+  font-size: 16px;
+  margin: 0 0 12px 0;
+}
+
+.detail pre {
+  background: #f4f4f4;
+  padding: 12px;
+  border-radius: 6px;
+  font-size: 13px;
+  overflow-x: auto;
+}
+
+.placeholder {
+  color: #999;
+  font-style: italic;
+}
+.annotation {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid #eee;
+}
+
+.annotation h4 {
+  font-size: 14px;
+  margin: 0 0 8px 0;
+}
+
+.annotation textarea {
+  width: 100%;
+  min-height: 80px;
+  font-family: inherit;
+  font-size: 14px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  resize: vertical;
+}
+
+.failure-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+  font-size: 14px;
+  cursor: pointer;
+}
+.timeline li.failure {
+  background: #fff0f0;
+  border-left: 3px solid #e74c3c;
+}
+
+.timeline li.failure.selected {
+  background: #ffe0e0;
+}
+
+.step-summary {
+  flex: 1;
+}
+
+.step-badges {
+  display: flex;
+  gap: 4px;
+  font-size: 12px;
+}
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+  gap: 16px;
+}
+
+.app-header h1 {
+  margin: 0;
+}
+
+.trajectory-picker {
+  font-size: 14px;
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background: white;
+  cursor: pointer;
+  min-width: 280px;
+}
