@@ -4,7 +4,7 @@ A lightweight web tool for inspecting, replaying, and annotating AI agent runs â
 
 **Live demo:** [agent-trajectory-inspector.vercel.app](https://agent-trajectory-inspector.vercel.app/)
 
-> ðŸ“¸ _Screenshot/demo GIF will go here._
+![Agent Trajectory Inspector demo](demo.gif)
 
 ---
 
