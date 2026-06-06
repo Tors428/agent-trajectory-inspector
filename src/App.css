@@ -183,3 +183,181 @@ body {
   cursor: pointer;
   min-width: 280px;
 }
+/* === Generate bar === */
+.generate-bar {
+  display: flex;
+  gap: 8px;
+  margin: 16px 0 12px 0;
+  padding: 12px;
+  background: white;
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+}
+
+.generate-bar input {
+  flex: 1;
+  background: white;
+  color: #1a1a1a;
+  padding: 10px 12px;
+  font-size: 14px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+}
+
+.generate-bar input::placeholder {
+  color: #999;
+}
+
+.generate-bar button {
+  padding: 10px 18px;
+  font-size: 14px;
+  font-weight: 600;
+  border: none;
+  border-radius: 6px;
+  background: #2563eb;
+  color: white;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s;
+}
+
+.generate-bar button:hover:not(:disabled) {
+  background: #1d4ed8;
+}
+
+.generate-bar button:disabled {
+  background: #c4c4c8;
+  cursor: not-allowed;
+}
+
+.error {
+  color: #c0392b;
+  background: #fff0f0;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 14px;
+  margin: 8px 0;
+}
+
+/* === Polish pass === */
+
+/* Force light backgrounds on all form inputs */
+input, textarea, select, button {
+  background: white;
+  color: #1a1a1a;
+}
+
+/* Title back to bold black */
+.app-header h1 {
+  font-size: 22px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0;
+}
+
+/* Fix the dropdown */
+.trajectory-picker {
+  background: white;
+  color: #1a1a1a;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-size: 14px;
+  min-width: 260px;
+  max-width: 360px;
+}
+
+/* Notes textarea — force light */
+.annotation textarea {
+  background: white;
+  color: #1a1a1a;
+}
+
+.annotation textarea::placeholder {
+  color: #999;
+}
+
+/* Subtle elevation on the cards */
+.timeline, .detail {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+/* Headings — tighter, more professional */
+.app h2 {
+  font-size: 15px;
+  font-weight: 500;
+  color: #444;
+  margin: 4px 0 2px 0;
+}
+
+.app .goal {
+  font-size: 13px;
+  color: #777;
+  margin: 0 0 12px 0;
+}
+
+.detail h4 {
+  font-size: 15px;
+  font-weight: 600;
+  margin: 0 0 10px 0;
+  color: #1a1a1a;
+}
+
+.timeline li {
+  padding: 10px 12px;
+}
+
+/* === Step-type color system: visible on hover & select === */
+
+.timeline li[data-type] {
+  border-left: 3px solid transparent;
+  transition: background 0.12s, border-left-color 0.12s;
+}
+
+/* THOUGHT — purple */
+.timeline li[data-type='thought']:hover {
+  background: #f6efff;
+  border-left-color: #9b5de5;
+}
+.timeline li[data-type='thought'].selected {
+  background: #ebdcff;
+  border-left-color: #7b3ed1;
+}
+
+/* TOOL_CALL — blue */
+.timeline li[data-type='tool_call']:hover {
+  background: #ebf3ff;
+  border-left-color: #2563eb;
+}
+.timeline li[data-type='tool_call'].selected {
+  background: #d7e6ff;
+  border-left-color: #1d4ed8;
+}
+
+/* OBSERVATION — amber */
+.timeline li[data-type='observation']:hover {
+  background: #fff5e0;
+  border-left-color: #d4830a;
+}
+.timeline li[data-type='observation'].selected {
+  background: #ffe9c2;
+  border-left-color: #b06600;
+}
+
+/* ACTION — green */
+.timeline li[data-type='action']:hover {
+  background: #eaf6ee;
+  border-left-color: #2c9b4f;
+}
+.timeline li[data-type='action'].selected {
+  background: #d3edd9;
+  border-left-color: #157f3c;
+}
+
+/* FAILURE flag overrides everything — red */
+.timeline li.failure,
+.timeline li.failure:hover,
+.timeline li.failure.selected {
+  background: #fff0f0;
+  border-left-color: #e74c3c;
+}

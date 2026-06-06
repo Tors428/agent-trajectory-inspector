@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import './App.css';
-import trajectories from './trajectories.json';
+import trajectoriesData from './trajectories.json';
+import { generateTrajectory } from './gemini.js';
 
 function getIcon(type) {
   if (type === 'thought') return '💭';
@@ -51,9 +52,7 @@ function StepDetail({ step }) {
     return (
       <div>
         <h4>🖱 Action: {step.content.actionType}</h4>
-        <p>
-          <strong>Target:</strong> {step.content.target}
-        </p>
+        <p><strong>Target:</strong> {step.content.target}</p>
         <p>{step.content.description}</p>
       </div>
     );
@@ -74,11 +73,14 @@ function loadAnnotations() {
 }
 
 function App() {
-  const [selectedTrajectoryId, setSelectedTrajectoryId] = useState(
-    trajectories[0].id
-  );
+  const [trajectories, setTrajectories] = useState(trajectoriesData);
+  const [selectedTrajectoryId, setSelectedTrajectoryId] = useState(trajectoriesData[0].id);
   const [selectedStepId, setSelectedStepId] = useState(null);
   const [annotations, setAnnotations] = useState(loadAnnotations);
+
+  const [goalInput, setGoalInput] = useState('');
+  const [isGenerating, setIsGenerating] = useState(false);
+  const [generationError, setGenerationError] = useState(null);
 
   useEffect(() => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(annotations));
@@ -103,6 +105,23 @@ function App() {
     }));
   };
 
+  const handleGenerate = async () => {
+    if (!goalInput.trim()) return;
+    setIsGenerating(true);
+    setGenerationError(null);
+    try {
+      const newTraj = await generateTrajectory(goalInput.trim());
+      setTrajectories((prev) => [...prev, newTraj]);
+      setSelectedTrajectoryId(newTraj.id);
+      setSelectedStepId(null);
+      setGoalInput('');
+    } catch (err) {
+      setGenerationError(err.message);
+    } finally {
+      setIsGenerating(false);
+    }
+  };
+
   return (
     <div className="app">
       <div className="app-header">
@@ -123,6 +142,20 @@ function App() {
         </select>
       </div>
 
+      <div className="generate-bar">
+        <input
+          type="text"
+          value={goalInput}
+          onChange={(e) => setGoalInput(e.target.value)}
+          placeholder="Type a goal (e.g. 'Book a flight from SFO to NYC')..."
+          disabled={isGenerating}
+        />
+        <button onClick={handleGenerate} disabled={isGenerating || !goalInput.trim()}>
+          {isGenerating ? 'Generating…' : '✨ Generate trajectory'}
+        </button>
+      </div>
+      {generationError && <p className="error">⚠️ {generationError}</p>}
+
       <h2>{trajectory.title}</h2>
       <p className="goal">Goal: {trajectory.goal}</p>
 
@@ -135,14 +168,13 @@ function App() {
               const classes = [
                 selectedStepId === step.id ? 'selected' : '',
                 ann.isFailure ? 'failure' : '',
-              ]
-                .join(' ')
-                .trim();
+              ].join(' ').trim();
 
               return (
                 <li
                   key={step.id}
                   className={classes}
+                  data-type={step.type}
                   onClick={() => setSelectedStepId(step.id)}
                 >
                   <span>{getIcon(step.type)}</span>
